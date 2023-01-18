@@ -1,0 +1,27 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Joao",
+      "senha": "12345"
+    }
+  ],
+  "elementos": [
+    {
+      "id": 1,
+      "nome": "ericsson hll",
+      "usuario": {
+        "id": 1,
+        "nome": "Joao"
+      }
+    },
+    {
+      "id": 2,
+      "nome": "ericsson hlr",
+      "usuario": {
+        "id": 1,
+        "nome": "Joao"
+      }
+    }
+  ]
+}

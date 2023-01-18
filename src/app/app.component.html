@@ -1,0 +1,56 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Gerenciamento de Elementos</li>
+  </ol>
+</nav>
+<div class="container">
+  <div class="card list-elemento">
+    <h5 class="card-header">Lista de Elementos</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Criador</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let elemento of elementos">
+              <td>{{elemento.id}}</td>
+              <td>{{elemento.nome}}</td>
+              <td>{{elemento.usuario.nome}}</td>
+              <td>
+                <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteElemento(elemento)">Deletar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class="card add-elemento">
+      <h5 class="card-header">Adicionar Elementos</h5>
+      <div class="card-body">
+          <form id="add-form" (ngSubmit)="f.form.valid && saveElemento(f)" #f="ngForm" novalidate>
+            <div class="form-group">
+                <label for="model">Nome</label>
+                <input type="text" [(ngModel)]="elemento.nome"  [ngModelOptions]="{standalone: true}" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+                <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+                    <div *ngIf="nome.errors?.['required']">Nome é obrigatório</div>
+                </div>
+            </div>
+            <div class="form-group ">
+                <label for="color">Criador</label>
+                <input type="text" [(ngModel)]="elemento.usuario" [ngModelOptions]="{standalone: true}" #usuario="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && usuario.invalid }" placeholder="Atribua o criador">
+                <div *ngIf="f.submitted && usuario.invalid" class="invalid-feedback">
+                    <div *ngIf="usuario.errors">O criador é obrigatório</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-add-car">Salvar</button>
+            <button type="reset" class="btn btn-secondary btn-add-car" (click)="cleanFormElemento(f)">Cancelar</button>
+          </form>
+      </div>
+    </div>
+</div>
